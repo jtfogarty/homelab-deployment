@@ -7,11 +7,6 @@ groups:
       ssh:
         user: root
 
-# Bastion Host
-  - name: bastion
-    alias: router
-    targets:
-      - pmxrouter.danmanners.io
 
 # Unifi Controller
   - name: unifi
@@ -31,13 +26,11 @@ groups:
 
       - name: k8s-primary
         targets: 
-          - 10.99.0.20
+          - 10.10.100.8
 
       - name: k8s-nodes
         targets:
-          - 10.99.0.21
-          - 10.99.0.22
-          - 10.99.0.23
+          - 10.10.100.11
 
       - name: docker
         targets:
@@ -45,13 +38,10 @@ groups:
           - 10.99.0.32      
           - 10.99.0.33
           - 10.99.0.34
-    config:
-      ssh:
-        proxyjump: ubuntu@pmxrouter.danmanners.io
 
 # General Config
 config:
   ssh:
-    user: ubuntu
+    user: jtfogar
     host-key-check: false
     private-key: ~/.ssh/id_rsa
