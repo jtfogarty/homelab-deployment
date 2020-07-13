@@ -38,3 +38,16 @@ The process to setup each cluster is as follows;
   - Ubuntu.yaml
   - k8s-primary.yaml
   - k8s-workerX.yaml
+- Run `bolt plan run deploy_k8s::init_master -v env=dev`
+  -  this also installs calico
+- Run `bolt plan run deploy_k8s::init_workers -v env=dev`
+- Run `bolt plan run deploy_k8s::install_rook -v env=dev`
+- Run `bolt plan run manage_k8s::deploy_metallb target=dev-mstr-01`
+- Run `bolt plan run manage_k8s::deploy_kubeflow -v env=dev`
+- Run `bolt plan run manage_k8s::deploy_jenkins -v env=dev`
+- Run `bolt plan run manage_k8s::deploy_elasticsearch -v env=dev`
+- Run `bolt plan run manage_k8s::deploy_docure -v env=dev`
+- Run `bolt plan run manage_k8s::deploy_git-metrics -v env=dev`
+
+
+
