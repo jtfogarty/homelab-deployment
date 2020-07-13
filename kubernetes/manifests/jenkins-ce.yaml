@@ -43,7 +43,7 @@ spec:
     spec:
       containers:
       - name: jenkins-ce
-        image: jenkins/jenkins:2.242-centos7
+        image: jenkins/jenkins:2.243-centos7
         ports:
         - containerPort: 8080
           name: web
@@ -75,4 +75,34 @@ spec:
     protocol: TCP
   selector:
     run: jenkins-ce
-
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: default
+---
+kind: ClusterRole
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  namespace: default
+  name: jenkins
+rules:
+- apiGroups: [""]
+  resources: ["services"]
+  verbs: ["get", "watch", "list"]
+- apiGroups: [""]
+  resources: ["pods"]
+  verbs: ["get", "list", "watch", "create", "update", "patch", "delete"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: jenkins-user
+subjects:
+  - kind: ServiceAccount
+    name: default
+    namespace: default
+roleRef:
+  kind: ClusterRole
+  name: jenkins
+  apiGroup: rbac.authorization.k8s.io

@@ -19,7 +19,9 @@ plan deploy_router::nginx () {
   apply('bastion', _run_as => root) {
 
     # Define the relevant variables.
+    $pihole_external_url    = lookup('common::pihole::pihole_external_url')
     $sonarqube_external_url = lookup('sonarqube::sonarqube_external_url')
+    $nexus_external_url     = lookup('nexus::nexus_external_url')
     $jenkins_external_url   = lookup('jenkins::jenkins_external_url')
     $gitlab_external_url    = lookup('gitlab::gitlab_external_url')
     $gitlab_registry_port   = lookup('gitlab::gitlab_registry_port')
@@ -44,17 +46,25 @@ plan deploy_router::nginx () {
   apply('bastion', _run_as => root) {
 
     # Define the relevant variables.
+    $nexus_external_url     = lookup('nexus::nexus_external_url')
     $gitlab_external_url    = lookup('gitlab::gitlab_external_url')
     $jenkins_external_url   = lookup('jenkins::jenkins_external_url')
     $sonarqube_external_url = lookup('sonarqube::sonarqube_external_url')
 
-    # Registers or renews the LetsEncrypt cert
+    # Ensure that the NGINX service is up and operational.
+    service {'nginx':
+      ensure => running,
+      enable => true,
+    }
+
+    # Registers or renews the LetsEncrypt cert, and refreshes the NGINX service.
     exec { 'certwork' :
       command => "/usr/bin/certbot certonly --standalone \
         --preferred-challenges http \
-        -d ${gitlab_external_url},${jenkins_external_url},${sonarqube_external_url} \
+        -d ${gitlab_external_url},${jenkins_external_url},${sonarqube_external_url},${nexus_external_url} \
         --http-01-address ${facts['networking']['interfaces']['eth0']['ip']} \
         -n --expand",
+      notify  => Service['nginx']
     }
 
     # Performs cert magic after renewal
