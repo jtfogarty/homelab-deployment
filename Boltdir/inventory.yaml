@@ -1,15 +1,4 @@
 groups:
-<<<<<<< HEAD
-# Hypervisor Host
-  - name: proxmox
-    targets:
-      - pmx.danmanners.io
-    config:
-      ssh:
-        user: root
-
-=======
->>>>>>> kube_apply
 
 # Unifi Controller
   - name: unifi
@@ -21,33 +10,19 @@ groups:
     groups:
       - name: k8s-primary
         targets: 
-<<<<<<< HEAD
-          - 10.10.100.8
-
-      - name: k8s-nodes
-        targets:
-=======
           - 10.10.100.10
 
       - name: k8s-nodes
         targets:
           - 10.10.100.8
           - 10.10.100.9
->>>>>>> kube_apply
           - 10.10.100.11
 
       - name: docker
         targets:
-<<<<<<< HEAD
-          - 10.99.0.31
-          - 10.99.0.32      
-          - 10.99.0.33
-          - 10.99.0.34
-=======
           - 10.10.100.8
           - 10.10.100.9
           - 10.10.100.11
->>>>>>> kube_apply
 
 # General Config
 config:

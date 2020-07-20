@@ -1,6 +1,3 @@
-bolt plan run deploy_k8s::init_workers
-
-
 # Homelab Deployment
 All of the code to make sure that my homelab can be deployed simply and easily.
 

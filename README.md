@@ -44,7 +44,7 @@ The process to setup each cluster is as follows;
 - Run `bolt plan run deploy_k8s::install_rook -v env=dev`
 - Run `bolt plan run manage_k8s::deploy_metallb target=dev-mstr-01`
 - Run `bolt plan run manage_k8s::deploy_kubeflow -v env=dev`
-- Run `bolt plan run manage_k8s::deploy_jenkins -v env=dev`
+- Run `bolt plan run manage_k8s::deploy_jenkinsx -v env=dev`
 - Run `bolt plan run manage_k8s::deploy_elasticsearch -v env=dev`
 - Run `bolt plan run manage_k8s::deploy_docure -v env=dev`
 - Run `bolt plan run manage_k8s::deploy_git-metrics -v env=dev`

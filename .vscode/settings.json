@@ -1,8 +1,8 @@
 {
   "hiera-eyaml": {
-    "eyamlPath": "/usr/bin/eyaml",
-    "publicKeyPath": "/opt/deploykeys/public_key.pkcs7.pem",
-    "privateKeyPath": "/opt/deploykeys/private_key.pkcs7.pem"
+    "eyamlPath": "/opt/puppetlabs/bin/eyaml",
+    "publicKeyPath": "/etc/puppetlabs/puppet/eyaml/keys/public_key.pkcs7.pem",
+    "privateKeyPath": "/etc/puppetlabs/puppet/eyaml/keys/private_key.pkcs7.pem"
   },
   "yaml.schemas": {
     "https://forgeapi.puppet.com/schemas/bolt-project.json": [
