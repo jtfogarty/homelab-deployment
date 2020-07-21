@@ -2265,7 +2265,7 @@ spec:
     useAllNodes: false
     useAllDevices: false
     config:
-      storeType: filestore
+      osdsPerDevice: "1"
     nodes:
     - name: "dev-wrkr-01"
       devices: # specific devices to use for storage can be specified for each node
@@ -2282,8 +2282,3 @@ spec:
       - name: "nvme0n1"
         config:
           osdsPerDevice: "5"          
-  disruptionManagement:
-    managePodBudgets: false
-    osdMaintenanceTimeout: 30
-    manageMachineDisruptionBudgets: false
-    machineDisruptionBudgetNamespace: openshift-machine-api
